@@ -20,7 +20,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private PingBall ball;
 	private Paddle pad;
-	private ArrayList<Block> blocks = new ArrayList<>();
+	private BlockManager blockManager;
 	private int vidas;
 	private int puntaje;
 	private int nivel;
@@ -33,7 +33,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    font = new BitmapFont();
 		    font.getData().setScale(3, 2);
 		    nivel = 1;
-		    crearBloques(2+nivel);
+		    blockManager = new BlockManager();
+		    blockManager.createBlocks(nivel+2);
 			
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
@@ -41,33 +42,21 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    vidas = 3;
 		    puntaje = 0;    
 		}
-		public void crearBloques(int filas) {
-			blocks.clear();
-			int blockWidth = 70;
-		    int blockHeight = 26;
-		    int y = Gdx.graphics.getHeight();
-		    for (int cont = 0; cont<filas; cont++ ) {
-		    	y -= blockHeight+10;
-		    	for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
-		            blocks.add(new Block(x, y, blockWidth, blockHeight));
-		        }
-		    }
-		}
-		public void dibujaTextos() {
+		
+		public void dibujaTextos(PingBall b) {
 			//actualizar matrices de la cámara
 			camera.update();
 			//actualizar 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			//dibujar textos
-			font.draw(batch, "Puntos: " + puntaje, 10, 25);
+			font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
 			font.draw(batch, "Vidas : " + vidas, Gdx.graphics.getWidth()-20, 25);
 			batch.end();
 		}	
 		
 		@Override
 		public void render () {
-			int contBlock = 0;
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		
 	        shape.begin(ShapeRenderer.ShapeType.Filled);
 	        pad.draw(shape);
@@ -86,38 +75,30 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (vidas<=0) {
 	        	vidas = 3;
 	        	nivel = 1;
-	        	crearBloques(2+nivel);
+	        	puntaje = 0;
+	        	blockManager.createBlocks(nivel+2);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
 	        }
 	        // verificar si el nivel se terminó
-	        if (blocks.size()==0) {
+	        if (blockManager.getSize() == 0) {
 	        	nivel++;
-	        	crearBloques(2+nivel);
+	        	blockManager.createBlocks(nivel+2);
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        }    	
 	        //dibujar bloques
-	        for (Block b : blocks) {        	
-	        	contBlock += 1;
-	        	b.draw(shape);
-	        	if (contBlock == 2) {
-	        		ball.checkCollision(b);
-	        	}
-	        }
+	        
+	        blockManager.drawBlocks(shape);
+	        
 	        // actualizar estado de los bloques 
-	        for (int i = 0; i < blocks.size(); i++) {
-	            Block b = blocks.get(i);
-	            if (b.destroyed) {
-	            	puntaje++;
-	            	blocks.remove(b);
-	            	i--; //para no saltarse 1 tras eliminar del arraylist
-	            }
-	        }
+	        blockManager.checkCollision(ball);	        
+	        blockManager.removeDestroyedBlocks();
+	        
 	        
 	        ball.checkCollision(pad);
 	        ball.draw(shape);
 	        
 	        shape.end();
-	        dibujaTextos();
+	        dibujaTextos(ball);
 		}
 		
 		@Override

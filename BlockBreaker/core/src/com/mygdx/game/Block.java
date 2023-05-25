@@ -19,11 +19,14 @@ public class Block {
         destroyed = false;
         Random r = new Random(x+y);
         
-       cc = new Color(0.1f+r.nextFloat(), r.nextFloat(), r.nextFloat(), 10);
+       cc = new Color(0.1f+r.nextFloat(1), r.nextFloat(1), r.nextFloat(1), 10);
   
     }
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
         shape.rect(x, y, width, height);
+    }
+    public boolean isDestroyed() {
+    	return destroyed;
     }
 }

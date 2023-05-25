@@ -13,6 +13,7 @@ public class PingBall {
 	    private int xSpeed;
 	    private int ySpeed;
 	    private Color color = Color.WHITE;
+	    private int puntaje;
 	    private boolean estaQuieto;
 	    
 	    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
@@ -22,6 +23,7 @@ public class PingBall {
 	        this.xSpeed = xSpeed;
 	        this.ySpeed = ySpeed;
 	        estaQuieto = iniciaQuieto;
+	        puntaje = 0;
 	    }
 	    
 	    public boolean estaQuieto() {
@@ -72,6 +74,7 @@ public class PingBall {
 	    public void checkCollision(Block block) {
 	        if(collidesWith(block)){
 	            ySpeed = - ySpeed;
+	            puntaje++;
 	            block.destroyed = true;
 	        }
 	    }
@@ -80,6 +83,9 @@ public class PingBall {
 	    	boolean intersectaX = (bb.x + bb.width >= x-size) && (bb.x <= x+size);
 	        boolean intersectaY = (bb.y + bb.height >= y-size) && (bb.y <= y+size);		
 	    	return intersectaX && intersectaY;
+	    }
+	    public int getPuntaje() {
+	    	return puntaje;
 	    }
 	    
 	}
