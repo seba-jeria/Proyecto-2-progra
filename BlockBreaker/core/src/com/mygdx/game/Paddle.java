@@ -24,7 +24,7 @@ public class Paddle {
 	public int getHeight() {return height;}
 
 	public void draw(ShapeRenderer shape){
-        shape.setColor(Color.BLUE);
+        shape.setColor(Color.GREEN);
         int x2 = x; //= Gdx.input.getX();
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 =x-15;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2=x+15; 

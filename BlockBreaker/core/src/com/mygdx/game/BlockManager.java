@@ -14,6 +14,7 @@ public class BlockManager {
     }
 
     public void createBlocks(int filas) {
+    	double randomValue = Math.random(); // Generar un número aleatorio entre 0 y 1
         blocks.clear();
         int blockWidth = 70;
         int blockHeight = 26;
@@ -22,7 +23,15 @@ public class BlockManager {
         for (int cont = 0; cont < filas; cont++) {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
-                blocks.add(new Block(x, y, blockWidth, blockHeight));
+            	randomValue = Math.random();
+	
+	                if (randomValue < 0.95) {
+	                    // 950% de probabilidad de que sea un bloque normal
+	                    blocks.add(new NormalBlock(x, y, blockWidth, blockHeight));
+	                } else {
+	                    // 5% de probabilidad de que sea un bloque especial
+	                    blocks.add(new SpecialBlock(x, y, blockWidth, blockHeight));
+	                }
             }
         }
     }
@@ -44,7 +53,7 @@ public class BlockManager {
         for (Block block : blocks) {
         	if(colision.blockBall(block, ball)) {
         		ball.checkCollision(block);
-        		block.destroyed = true;
+        		block.checkCollition(ball);
         	}
         }
     }

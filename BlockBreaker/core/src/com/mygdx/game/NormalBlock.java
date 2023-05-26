@@ -1,20 +1,20 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public abstract class Block {
-    private int x;
+public class NormalBlock extends Block{
+	private int x;
     private int y;
     private int width;
     private int height;
     Color cc;
     boolean destroyed;
     
-    public Block (int x, int y, int width, int height) {
+    public NormalBlock(int x, int y, int width, int height) {
+    	super(x, y, width, height);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -22,16 +22,18 @@ public abstract class Block {
         destroyed = false;
         Random r = new Random(x+y);
         
-       cc = new Color(0.1f+r.nextFloat(1), r.nextFloat(1), r.nextFloat(1), 10);
+       cc = new Color(0, 0, 1, 10);
   
     }
-    public abstract void checkCollition(PingBall ball);
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
         shape.rect(x, y, width, height);
     }
     public boolean isDestroyed() {
     	return destroyed;
+    }
+    public void checkCollition(PingBall ball) {
+    	destroyed = true;
     }
     public int getX() {return x;}
     

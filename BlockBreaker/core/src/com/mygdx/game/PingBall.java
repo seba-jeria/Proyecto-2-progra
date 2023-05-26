@@ -47,6 +47,8 @@ public class PingBall {
 	    
 	    public int getSize() {return size;}
 	    
+	    public void setSize(int size) {this.size = size;}
+	    
 	    public void draw(ShapeRenderer shape){
 	        shape.setColor(color);
 	        shape.circle(x, y, size);
