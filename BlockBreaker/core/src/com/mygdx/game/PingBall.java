@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class PingBall {
+public class PingBall implements ChangeSpeed{
 	    private int x;
 	    private int y;
 	    private int size;
@@ -26,6 +26,7 @@ public class PingBall {
 	        puntaje = 0;
 	    }
 	    
+		
 	    public void setPuntaje(int puntos) {
 	    	puntaje = puntos;
 	    }
@@ -48,6 +49,10 @@ public class PingBall {
 	    public int getSize() {return size;}
 	    
 	    public void setSize(int size) {this.size = size;}
+	    
+	    public int getXSpeed() {return xSpeed;}
+	    
+	    public int getYSpeed() {return ySpeed;}
 	    
 	    public void draw(ShapeRenderer shape){
 	        shape.setColor(color);
@@ -90,5 +95,21 @@ public class PingBall {
 	    public int getPuntaje() {
 	    	return puntaje;
 	    }
+
+
+		@Override
+		public void acelerar() {
+			// TODO Auto-generated method stub
+			xSpeed += 10;
+			ySpeed += 10;
+		}
+
+
+		@Override
+		public void realentizar() {
+			// TODO Auto-generated method stub
+			xSpeed -= 2;
+			ySpeed -= 2;
+		}
 	    
 	}

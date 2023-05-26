@@ -24,6 +24,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private int vidas;
 	private int nivel;
 	private Colisiones colision;
+	private int xSpeedBall;
+	private int ySpeedBall;
     
 		@Override
 		public void create () {	
@@ -36,11 +38,13 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    blockManager = new BlockManager();
 		    blockManager.createBlocks(nivel+2);
 		    colision = new Colisiones();
+		    xSpeedBall = 5;
+		    ySpeedBall = 7;
 			
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
 		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
-		    vidas = 3;   
+		    vidas = 10;   
 		}
 		
 		public void dibujaTextos(PingBall b) {
@@ -70,13 +74,16 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	vidas--;
 	        	//nivel = 1;
 	        	int puntaje = ball.getPuntaje();
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	xSpeedBall = ball.getXSpeed();
+	        	ySpeedBall = ball.getYSpeed();
+	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
 	        	ball.setPuntaje(puntaje);
 	        }
 	        // verificar game over
 	        if (vidas<=0) {
 	        	vidas = 3;
 	        	nivel = 1;
+	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        	ball.setPuntaje(0);
 	        	blockManager.createBlocks(nivel+2);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
@@ -85,8 +92,12 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (blockManager.getSize() == 0) {
 	        	nivel++;
 	        	blockManager.createBlocks(nivel+2);
+	        	ball.acelerar();
+	        	pad.realentizar();
 	        	int puntaje = ball.getPuntaje();
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	xSpeedBall = ball.getXSpeed();
+	        	ySpeedBall = ball.getYSpeed();
+	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
 	        	ball.setPuntaje(puntaje);
 	        }    	
 	        //dibujar bloques
