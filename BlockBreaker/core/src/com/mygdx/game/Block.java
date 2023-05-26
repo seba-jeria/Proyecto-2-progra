@@ -7,7 +7,10 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Color;
 
 public class Block {
-    int x,y,width,height;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
     Color cc;
     boolean destroyed;
     
@@ -29,4 +32,11 @@ public class Block {
     public boolean isDestroyed() {
     	return destroyed;
     }
+    public int getX() {return x;}
+    
+    public int getY() {return y;}
+    
+    public int getWidth() {return width;}
+    
+    public int getHeight() {return height;}
 }

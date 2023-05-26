@@ -22,8 +22,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private Paddle pad;
 	private BlockManager blockManager;
 	private int vidas;
-	private int puntaje;
 	private int nivel;
+	private Colisiones colision;
     
 		@Override
 		public void create () {	
@@ -35,12 +35,12 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    nivel = 1;
 		    blockManager = new BlockManager();
 		    blockManager.createBlocks(nivel+2);
+		    colision = new Colisiones();
 			
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
 		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
-		    vidas = 3;
-		    puntaje = 0;    
+		    vidas = 3;   
 		}
 		
 		public void dibujaTextos(PingBall b) {
@@ -69,13 +69,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (ball.getY()<0) {
 	        	vidas--;
 	        	//nivel = 1;
+	        	int puntaje = ball.getPuntaje();
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	ball.setPuntaje(puntaje);
 	        }
 	        // verificar game over
 	        if (vidas<=0) {
 	        	vidas = 3;
 	        	nivel = 1;
-	        	puntaje = 0;
+	        	ball.setPuntaje(0);
 	        	blockManager.createBlocks(nivel+2);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
 	        }
@@ -83,7 +85,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (blockManager.getSize() == 0) {
 	        	nivel++;
 	        	blockManager.createBlocks(nivel+2);
+	        	int puntaje = ball.getPuntaje();
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	ball.setPuntaje(puntaje);
 	        }    	
 	        //dibujar bloques
 	        
@@ -93,8 +97,10 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        blockManager.checkCollision(ball);	        
 	        blockManager.removeDestroyedBlocks();
 	        
+	        if (colision.paddleBall(pad, ball)) {
+	        	ball.checkCollision(pad);
+	        }
 	        
-	        ball.checkCollision(pad);
 	        ball.draw(shape);
 	        
 	        shape.end();
