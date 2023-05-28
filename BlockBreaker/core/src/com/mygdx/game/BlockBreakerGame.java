@@ -1,8 +1,5 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 
 public class BlockBreakerGame extends ApplicationAdapter {
     private OrthographicCamera camera;
@@ -27,7 +23,6 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private int xSpeedBall;
 	private int ySpeedBall;
 	private int levelSpeed;
-    
 		@Override
 		public void create () {	
 			camera = new OrthographicCamera();
@@ -37,18 +32,16 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    font.getData().setScale(3, 2);
 		    nivel = 1;
 		    blockManager = new BlockManager();
-		    blockManager.createBlocks(nivel);
+		    blockManager.createBlocks(nivel+2);
 		    colision = new Colisiones();
 		    xSpeedBall = 5;
 		    ySpeedBall = 7;
 		    levelSpeed = 5;
-			
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
 		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 		    vidas = 5;   
 		}
-		
 		public void dibujaTextos(PingBall b) {
 			//actualizar matrices de la cámara
 			camera.update();
@@ -56,14 +49,13 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			//dibujar textos
-			font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+b.getXSpeed()+" - yVel: "+b.getYSpeed(), 10, 50);
-			font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+pad.getX()+" - yVel: "+pad.getY(), 10, 25);
-			//font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
-			//font.draw(batch, "Nivel: " + nivel, 350, 25);
-			//font.draw(batch, "Vidas: " + vidas, Gdx.graphics.getWidth()-20, 25);
+			//font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+b.getXSpeed()+" - yVel: "+b.getYSpeed(), 10, 50);
+			//font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+pad.getX()+" - yVel: "+pad.getY(), 10, 25);
+			font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
+			font.draw(batch, "Nivel: " + nivel, 350, 25);
+			font.draw(batch, "Vidas: " + vidas, Gdx.graphics.getWidth()-20, 25);
 			batch.end();
 		}	
-		
 		@Override
 		public void render () {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		
@@ -79,7 +71,6 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        //verificar si se fue la bola x abajo
 	        if (ball.getY()<0) {
 	        	vidas--;
-	        	//nivel = 1;
 	        	int puntaje = ball.getPuntaje();
 	        	pad.acelerar();
 	        	xSpeedBall = levelSpeed;
@@ -103,7 +94,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	nivel++;
 	        	blockManager.createBlocks(nivel+2);
 	        	ball.acelerar();
-	        	pad.realentizar();
+	        	pad.ralentizar();
 	        	levelSpeed += 2;
 	        	xSpeedBall = levelSpeed;
 	         	ySpeedBall = levelSpeed+2;
@@ -112,25 +103,18 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	ball.setPuntaje(puntaje);
 	        }    	
 	        //dibujar bloques
-	        
 	        blockManager.drawBlocks(shape);
-	        
 	        // actualizar estado de los bloques 
 	        blockManager.checkCollision(ball);	        
 	        blockManager.removeDestroyedBlocks();
-	        
 	        if (colision.paddleBall(pad, ball)) {
 	        	ball.checkCollision(pad);
 	        }
-	        
 	        ball.draw(shape);
-	        
 	        shape.end();
 	        dibujaTextos(ball);
 		}
-		
 		@Override
 		public void dispose () {
-
 		}
 	}

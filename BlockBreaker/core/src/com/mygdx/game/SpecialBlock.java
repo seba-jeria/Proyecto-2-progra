@@ -1,43 +1,41 @@
 package com.mygdx.game;
 
-import java.util.Random;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
+//Clase abstracta extendida de Block
 public class SpecialBlock extends Block{
 	private int x;
     private int y;
     private int width;
     private int height;
     Color cc;
-    private boolean destroyed;
-    
-    
+    private boolean destroyed;   
+    //Metodo con las dimensiones de la pantalla
     public SpecialBlock(int x, int y, int width, int height) {
-    	super(x, y, width, height);
+    	super(x, y, width, height); //necesario para la extensión de Block
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         destroyed = false;
-        Random r = new Random(x+y);
-        
-       cc = new Color(1, 0, 0, 10);
-  
+        cc = new Color(1, 0, 0, 10); //color del bloque
     }
+  //Para que se dibuje el bloque
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
         shape.rect(x, y, width, height);
     }
+  //Si es true destruye bloque
     public boolean isDestroyed() {
     	return destroyed;
     }
+    //Si colisiona con el bloque especial, destruye el bloque. La pelota se agranda y se hace mas lenta 
     public void checkCollition(PingBall ball) {
     	ball.setSize(25);
-    	ball.realentizar();
+    	ball.ralentizar();
     	destroyed = true;
     }
+    //getters de las dimensiones
     public int getX() {return x;}
     
     public int getY() {return y;}

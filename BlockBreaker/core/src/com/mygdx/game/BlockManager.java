@@ -7,26 +7,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class BlockManager {
     private ArrayList<Block> blocks;
     private Colisiones colision;
-
     public BlockManager() {
         blocks = new ArrayList<>();
         colision = new Colisiones();
     }
-
+    //Crea el bloque
     public void createBlocks(int filas) {
     	double randomValue = Math.random(); // Generar un número aleatorio entre 0 y 1
         blocks.clear();
         int blockWidth = 70;
         int blockHeight = 26;
         int y = Gdx.graphics.getHeight();
-
         for (int cont = 0; cont < filas; cont++) {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
             	randomValue = Math.random();
-	
-	                if (randomValue < 0.7) {
-	                    // 950% de probabilidad de que sea un bloque normal
+	                if (randomValue < 0.95) {
+	                    // 95% de probabilidad de que sea un bloque normal
 	                    blocks.add(new NormalBlock(x, y, blockWidth, blockHeight));
 	                } else {
 	                    // 5% de probabilidad de que sea un bloque especial
@@ -35,21 +32,14 @@ public class BlockManager {
             }
         }
     }
-
-    public void updateBlocks(float deltaTime) {
-        for (Block block : blocks) {
-            // Actualizar la lógica de los bloques (si es necesario)
-        }
-    }
-
+    //Dibuja el bloque
     public void drawBlocks(ShapeRenderer shape) {
         for (Block block : blocks) {
             block.draw(shape);
         }
     }
-
+    //Chequea la colision de la bola con el bloque
     public void checkCollision(PingBall ball) {
-    	
         for (Block block : blocks) {
         	if(colision.blockBall(block, ball)) {
         		ball.checkCollision(block);
@@ -57,7 +47,7 @@ public class BlockManager {
         	}
         }
     }
-
+    //Remueve el bloque destruido
     public void removeDestroyedBlocks() {
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
@@ -67,13 +57,12 @@ public class BlockManager {
             }
         }
     }
+    //getter
     public int getSize() {
     	return(blocks.size());
     }
-
+    //Array de Block
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
-
-    // Otros métodos de utilidad, getters y setters si es necesario
 }

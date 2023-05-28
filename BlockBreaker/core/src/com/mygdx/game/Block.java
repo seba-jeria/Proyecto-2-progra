@@ -2,10 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
-
+//Clase abstracta
 public abstract class Block {
     private int x;
     private int y;
@@ -13,26 +12,26 @@ public abstract class Block {
     private int height;
     Color cc;
     boolean destroyed;
-    
+    //Metodo con las dimensiones de la pantalla
     public Block (int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        destroyed = false;
-        Random r = new Random(x+y);
-        
-       cc = new Color(0.1f+r.nextFloat(1), r.nextFloat(1), r.nextFloat(1), 10);
-  
+        destroyed = false;       
     }
+    //Método abstracto usado en NormalBlock y SpecialBlock
     public abstract void checkCollition(PingBall ball);
+    //Dibujo del bloque
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
         shape.rect(x, y, width, height);
     }
+    //Si es true destruye bloque
     public boolean isDestroyed() {
     	return destroyed;
     }
+    //getters de las dimensiones
     public int getX() {return x;}
     
     public int getY() {return y;}
