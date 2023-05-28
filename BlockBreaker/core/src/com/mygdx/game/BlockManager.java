@@ -25,7 +25,7 @@ public class BlockManager {
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
             	randomValue = Math.random();
 	
-	                if (randomValue < 0.95) {
+	                if (randomValue < 0.7) {
 	                    // 950% de probabilidad de que sea un bloque normal
 	                    blocks.add(new NormalBlock(x, y, blockWidth, blockHeight));
 	                } else {

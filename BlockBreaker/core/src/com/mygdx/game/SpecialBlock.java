@@ -11,7 +11,8 @@ public class SpecialBlock extends Block{
     private int width;
     private int height;
     Color cc;
-    boolean destroyed;
+    private boolean destroyed;
+    
     
     public SpecialBlock(int x, int y, int width, int height) {
     	super(x, y, width, height);
@@ -34,6 +35,7 @@ public class SpecialBlock extends Block{
     }
     public void checkCollition(PingBall ball) {
     	ball.setSize(25);
+    	ball.realentizar();
     	destroyed = true;
     }
     public int getX() {return x;}

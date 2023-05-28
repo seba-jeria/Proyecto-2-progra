@@ -26,6 +26,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private Colisiones colision;
 	private int xSpeedBall;
 	private int ySpeedBall;
+	private int levelSpeed;
     
 		@Override
 		public void create () {	
@@ -36,15 +37,16 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    font.getData().setScale(3, 2);
 		    nivel = 1;
 		    blockManager = new BlockManager();
-		    blockManager.createBlocks(nivel+2);
+		    blockManager.createBlocks(nivel);
 		    colision = new Colisiones();
 		    xSpeedBall = 5;
 		    ySpeedBall = 7;
+		    levelSpeed = 5;
 			
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
 		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
-		    vidas = 10;   
+		    vidas = 5;   
 		}
 		
 		public void dibujaTextos(PingBall b) {
@@ -54,8 +56,11 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			//dibujar textos
-			font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
-			font.draw(batch, "Vidas : " + vidas, Gdx.graphics.getWidth()-20, 25);
+			font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+b.getXSpeed()+" - yVel: "+b.getYSpeed(), 10, 50);
+			font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+pad.getX()+" - yVel: "+pad.getY(), 10, 25);
+			//font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
+			//font.draw(batch, "Nivel: " + nivel, 350, 25);
+			//font.draw(batch, "Vidas: " + vidas, Gdx.graphics.getWidth()-20, 25);
 			batch.end();
 		}	
 		
@@ -64,6 +69,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		
 	        shape.begin(ShapeRenderer.ShapeType.Filled);
 	        pad.draw(shape);
+	        xSpeedBall = ball.getXSpeed();
+        	ySpeedBall = ball.getYSpeed();
 	        // monitorear inicio del juego
 	        if (ball.estaQuieto()) {
 	        	ball.setXY(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11);
@@ -74,8 +81,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	vidas--;
 	        	//nivel = 1;
 	        	int puntaje = ball.getPuntaje();
-	        	xSpeedBall = ball.getXSpeed();
-	        	ySpeedBall = ball.getYSpeed();
+	        	pad.acelerar();
+	        	xSpeedBall = levelSpeed;
+	         	ySpeedBall = levelSpeed+2;
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
 	        	ball.setPuntaje(puntaje);
 	        }
@@ -83,7 +91,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        if (vidas<=0) {
 	        	vidas = 3;
 	        	nivel = 1;
+	        	levelSpeed = 5;
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 	        	ball.setPuntaje(0);
 	        	blockManager.createBlocks(nivel+2);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
@@ -94,9 +104,10 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	blockManager.createBlocks(nivel+2);
 	        	ball.acelerar();
 	        	pad.realentizar();
+	        	levelSpeed += 2;
+	        	xSpeedBall = levelSpeed;
+	         	ySpeedBall = levelSpeed+2;
 	        	int puntaje = ball.getPuntaje();
-	        	xSpeedBall = ball.getXSpeed();
-	        	ySpeedBall = ball.getYSpeed();
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
 	        	ball.setPuntaje(puntaje);
 	        }    	

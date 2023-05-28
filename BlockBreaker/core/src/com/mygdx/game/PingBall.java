@@ -15,6 +15,7 @@ public class PingBall implements ChangeSpeed{
 	    private Color color = Color.WHITE;
 	    private int puntaje;
 	    private boolean estaQuieto;
+	    private boolean poderActivado = false;
 	    
 	    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
 	        this.x = x;
@@ -53,6 +54,10 @@ public class PingBall implements ChangeSpeed{
 	    public int getXSpeed() {return xSpeed;}
 	    
 	    public int getYSpeed() {return ySpeed;}
+	    
+	    public void setPoderAcivado(boolean poderActivado) {this.poderActivado = poderActivado;}
+	    
+	    public boolean getPoderActivado() {return poderActivado;}
 	    
 	    public void draw(ShapeRenderer shape){
 	        shape.setColor(color);
@@ -97,19 +102,30 @@ public class PingBall implements ChangeSpeed{
 	    }
 
 
-		@Override
-		public void acelerar() {
-			// TODO Auto-generated method stub
-			xSpeed += 10;
-			ySpeed += 10;
-		}
+	    @Override
+        public void acelerar() {
+            // TODO Auto-generated method stub
+            if(xSpeed > 0) { xSpeed += 2;}
+            else { xSpeed -= 2; }
+            if(ySpeed >0) { ySpeed += 2; }
+            else { ySpeed -=2; }
+        }
 
 
-		@Override
-		public void realentizar() {
-			// TODO Auto-generated method stub
-			xSpeed -= 2;
-			ySpeed -= 2;
-		}
+        @Override
+        public void realentizar() {
+            // TODO Auto-generated method stub
+        	if (!poderActivado) {
+	            if(xSpeed > 0) { xSpeed -= 2;}
+	            else { xSpeed += 2; }
+	            if(ySpeed >0) { ySpeed -= 2; }
+	            else { ySpeed +=2; }
+	            poderActivado = true;
+        	}
+        }
+        
+        public void resetSpeed() {
+        	
+        }
 	    
 	}

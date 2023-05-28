@@ -12,6 +12,7 @@ public class Paddle implements ChangeSpeed{
     private int height = 10;
     private boolean poderActivadoA;
     private boolean poderActivadoR;
+    private int paddleSpeed;
     
     public Paddle(int x, int y, int ancho, int alto) {
     	this.x = x;
@@ -20,6 +21,7 @@ public class Paddle implements ChangeSpeed{
     	height = alto;
     	poderActivadoA = false;
     	poderActivadoR = false;
+    	paddleSpeed = 15;
     }
      
     public int getX() {return x;}
@@ -28,17 +30,18 @@ public class Paddle implements ChangeSpeed{
 	public int getHeight() {return height;}
 
 	public void draw(ShapeRenderer shape){
-		int velocidad = 15;
         shape.setColor(Color.GREEN);
         int x2 = x; //= Gdx.input.getX();
         if (poderActivadoA) {
-        	velocidad += 5;
+        	paddleSpeed += 1;
+        	poderActivadoA = false;
         }
         if (poderActivadoR) {
-        	velocidad -= 5;
+        	paddleSpeed -= 2;
+        	poderActivadoR = false;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 =x-velocidad;
-    	if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2=x+velocidad; 
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 =x-paddleSpeed;
+    	if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2=x+paddleSpeed; 
        // y = Gdx.graphics.getHeight() - Gdx.input.getY(); 
         if (x2 > 0 && x2+width < Gdx.graphics.getWidth()) {
             x = x2;
