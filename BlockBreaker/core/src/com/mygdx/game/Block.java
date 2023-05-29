@@ -22,7 +22,7 @@ public abstract class Block {
     }
     //Método abstracto usado en NormalBlock y SpecialBlock
     public abstract void checkCollition(PingBall ball);
-    //Dibujo del bloque
+    //Dibujo del bloque en la ventana
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
         shape.rect(x, y, width, height);

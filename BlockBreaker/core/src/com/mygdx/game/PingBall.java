@@ -24,63 +24,7 @@ public class PingBall implements ChangeSpeed{
 	        this.ySpeed = ySpeed;
 	        estaQuieto = iniciaQuieto;
 	        puntaje = 0;
-	    }
-	    public void setPuntaje(int puntos) {
-	    	puntaje = puntos;
 	    }	    
-	    public boolean estaQuieto() {	    	return estaQuieto;
-	    }
-	    public void setEstaQuieto(boolean bb) {
-	    	estaQuieto=bb;
-	    }
-	    public void setXY(int x, int y) {
-	    	this.x = x;
-	        this.y = y;
-	    }	   
-	    
-	    //getter y setters necesarios
-	    public int getX() {return x;}	  
-	    
-	    public int getY() {return y;}	 
-	    
-	    public int getSize() {return size;}	  
-	    
-	    public void setSize(int size) {this.size = size;}	  
-	    
-	    public int getXSpeed() {return xSpeed;}	    
-	    
-	    public int getYSpeed() {return ySpeed;}	    
-	    
-	    public void setPoderAcivado(boolean poderActivado) {this.poderActivado = poderActivado;}	
-	    
-	    public boolean getPoderActivado() {return poderActivado;}	   
-	    
-	    public void draw(ShapeRenderer shape){
-	        shape.setColor(color);
-	        shape.circle(x, y, size);
-	    }	    
-	    public void update() {
-	    	if (estaQuieto) return;
-	        x += xSpeed;
-	        y += ySpeed;
-	        if (x-size < 0 || x+size > Gdx.graphics.getWidth()) {
-	            xSpeed = -xSpeed;
-	        }
-	        if (y+size > Gdx.graphics.getHeight()) {
-	            ySpeed = -ySpeed;
-	        }
-	    }
-	    public void checkCollision(Paddle paddle) {
-	            ySpeed = -ySpeed;
-	    }
-	    public void checkCollision(Block block) {
-	            ySpeed = - ySpeed;
-	            puntaje++;
-	    }
-	    public int getPuntaje() {
-	    	return puntaje;
-	    }
-	    
 	    @Override //Método para manejar la aceleración de la bola
         public void acelerar() {
             if(xSpeed > 0) { xSpeed += 2;}
@@ -98,5 +42,64 @@ public class PingBall implements ChangeSpeed{
 	            poderActivado = true;
         	}
         }
+        //getter y setters necesarios
+	    public void setPuntaje(int puntos) {
+	    	puntaje = puntos;
+	    }	    
+	    public boolean estaQuieto() {	    	return estaQuieto;
+	    }
+	    public void setEstaQuieto(boolean bb) {
+	    	estaQuieto=bb;
+	    }
+	    public void setXY(int x, int y) {
+	    	this.x = x;
+	        this.y = y;
+	    }	   	    	  
+	    public int getX() {return x;}	  
 	    
+	    public int getY() {return y;}	 
+	    
+	    public int getSize() {return size;}	  
+	    
+	    public void setSize(int size) {this.size = size;}	  
+	    
+	    public int getXSpeed() {return xSpeed;}	    
+	    
+	    public int getYSpeed() {return ySpeed;}	    
+	    
+	    public void setPoderAcivado(boolean poderActivado) {this.poderActivado = poderActivado;}	
+	    
+	    public boolean getPoderActivado() {return poderActivado;}	
+	    
+	    public int getPuntaje() {
+	    	return puntaje;
+	    }
+	    
+	    //Dibuja la pelota en la ventana
+	    public void draw(ShapeRenderer shape){
+	        shape.setColor(color);
+	        shape.circle(x, y, size);
+	    }	    
+	    //Actualiza el movimiento según la velocidad de la pelota
+	    public void update() {
+	    	if (estaQuieto) return;
+	        x += xSpeed;
+	        y += ySpeed;
+	        if (x-size < 0 || x+size > Gdx.graphics.getWidth()) {
+	            xSpeed = -xSpeed;
+	        }
+	        if (y+size > Gdx.graphics.getHeight()) {
+	            ySpeed = -ySpeed;
+	        }
+	    }
+	    //Cambian la velocidad de la pelota cuando hay colisión
+	    public void checkCollision(Paddle paddle) {
+	            ySpeed = -ySpeed;
+	    }
+	    public void checkCollision(Block block) {
+	            ySpeed = - ySpeed;
+	            puntaje++;
+	    }
+	    
+
 	}

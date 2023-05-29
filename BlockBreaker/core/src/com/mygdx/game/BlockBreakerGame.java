@@ -49,8 +49,6 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			//dibujar textos
-			//font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+b.getXSpeed()+" - yVel: "+b.getYSpeed(), 10, 50);
-			//font.draw(batch, "Puntos: " + b.getPuntaje()+"|| xVel: "+pad.getX()+" - yVel: "+pad.getY(), 10, 25);
 			font.draw(batch, "Puntos: " + b.getPuntaje(), 10, 25);
 			font.draw(batch, "Nivel: " + nivel, 350, 25);
 			font.draw(batch, "Vidas: " + vidas, Gdx.graphics.getWidth()-20, 25);
@@ -80,7 +78,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        }
 	        // verificar game over
 	        if (vidas<=0) {
-	        	vidas = 3;
+	        	vidas = 5;
 	        	nivel = 1;
 	        	levelSpeed = 5;
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);

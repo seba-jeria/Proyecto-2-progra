@@ -24,7 +24,16 @@ public class Paddle implements ChangeSpeed{
     	poderActivadoR = false;
     	paddleSpeed = 15;
     }
-    //getters de las dimensiones
+    //Métodos de la interfaz
+    @Override
+	public void acelerar() {
+		poderActivadoA = true;
+	}
+	@Override
+	public void ralentizar() {
+		poderActivadoR = true;
+	}
+	//getters de las dimensiones
     public int getX() {return x;}
     
 	public int getY() {return y;}
@@ -33,6 +42,7 @@ public class Paddle implements ChangeSpeed{
 	
 	public int getHeight() {return height;}
 	
+	//Dibuja en la pantalla el paddle a partir del movimiento de las flechas
 	public void draw(ShapeRenderer shape){
         shape.setColor(Color.GREEN);
         int x2 = x; //= Gdx.input.getX();
@@ -51,12 +61,5 @@ public class Paddle implements ChangeSpeed{
         }
         shape.rect(x, y, width, height);
     }
-	@Override
-	public void acelerar() {
-		poderActivadoA = true;
-	}
-	@Override
-	public void ralentizar() {
-		poderActivadoR = true;
-	}
+
 }

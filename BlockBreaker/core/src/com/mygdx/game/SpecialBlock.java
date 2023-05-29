@@ -19,6 +19,12 @@ public class SpecialBlock extends Block{
         this.height = height;
         destroyed = false;
         cc = new Color(1, 0, 0, 10); //color del bloque
+    }   
+    //Si colisiona con el bloque especial, destruye el bloque. La pelota se agranda y se hace mas lenta 
+    public void checkCollition(PingBall ball) {
+    	ball.setSize(25);
+    	ball.ralentizar();
+    	destroyed = true;
     }
   //Para que se dibuje el bloque
     public void draw(ShapeRenderer shape){
@@ -29,12 +35,7 @@ public class SpecialBlock extends Block{
     public boolean isDestroyed() {
     	return destroyed;
     }
-    //Si colisiona con el bloque especial, destruye el bloque. La pelota se agranda y se hace mas lenta 
-    public void checkCollition(PingBall ball) {
-    	ball.setSize(25);
-    	ball.ralentizar();
-    	destroyed = true;
-    }
+
     //getters de las dimensiones
     public int getX() {return x;}
     

@@ -20,7 +20,10 @@ public class NormalBlock extends Block{
         this.height = height;
         destroyed = false;
         cc = new Color(0, 0, 1, 10); //color del bloque
-  
+    }  
+    //Chequea la colisión y si hay colisión destruye el bloque 
+    public void checkCollition(PingBall ball) {
+    	destroyed = true;
     }
     //Para que se dibuje el bloque
     public void draw(ShapeRenderer shape){
@@ -31,10 +34,7 @@ public class NormalBlock extends Block{
     public boolean isDestroyed() {
     	return destroyed;
     }
-    //Chequea la colisión y si hay colisión destruye el bloque 
-    public void checkCollition(PingBall ball) {
-    	destroyed = true;
-    }
+
     //getters de las dimensiones
     public int getX() {return x;}
     

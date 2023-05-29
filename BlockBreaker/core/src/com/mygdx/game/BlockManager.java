@@ -11,13 +11,14 @@ public class BlockManager {
         blocks = new ArrayList<>();
         colision = new Colisiones();
     }
-    //Crea el bloque
+    //Genera los bloques en la pantalla, las filas dependerán del nivel
     public void createBlocks(int filas) {
     	double randomValue = Math.random(); // Generar un número aleatorio entre 0 y 1
         blocks.clear();
         int blockWidth = 70;
         int blockHeight = 26;
         int y = Gdx.graphics.getHeight();
+        //Por cada fila se generan los bloques que quepan en la pantalla
         for (int cont = 0; cont < filas; cont++) {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
@@ -38,16 +39,7 @@ public class BlockManager {
             block.draw(shape);
         }
     }
-    //Chequea la colision de la bola con el bloque
-    public void checkCollision(PingBall ball) {
-        for (Block block : blocks) {
-        	if(colision.blockBall(block, ball)) {
-        		ball.checkCollision(block);
-        		block.checkCollition(ball);
-        	}
-        }
-    }
-    //Remueve el bloque destruido
+    //Actualiza el bloque destruido
     public void removeDestroyedBlocks() {
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
@@ -57,12 +49,21 @@ public class BlockManager {
             }
         }
     }
-    //getter
-    public int getSize() {
-    	return(blocks.size());
-    }
     //Array de Block
     public ArrayList<Block> getBlocks() {
         return blocks;
+    }
+    //Chequea la colision de la bola con el bloque
+    public void checkCollision(PingBall ball) {
+        for (Block block : blocks) {
+        	if(colision.blockBall(block, ball)) {
+        		ball.checkCollision(block);
+        		block.checkCollition(ball);
+        	}
+        }
+    }
+    //getter
+    public int getSize() {
+    	return(blocks.size());
     }
 }
