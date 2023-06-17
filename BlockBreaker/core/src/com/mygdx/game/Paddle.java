@@ -7,23 +7,39 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 //Clase implementada de la interfaz ChangeSpeed
 
-public class Paddle implements ChangeSpeed{
-    private int x = 20;
-    private int y = 20;
-    private int width = 100;
-    private int height = 10;
+public class Paddle implements ChangeSpeed {
+    private static Paddle instance;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
     private boolean poderActivadoA;
     private boolean poderActivadoR;
     private int paddleSpeed;
-    public Paddle(int x, int y, int ancho, int alto) {
-    	this.x = x;
-    	this.y= y;
-    	width = ancho;
-    	height = alto;
-    	poderActivadoA = false;
-    	poderActivadoR = false;
-    	paddleSpeed = 15;
+
+    private Paddle() {
+        // Constructor privado para evitar la creación de instancias directamente.
+    	reset();
     }
+
+    public static Paddle getInstance() {
+        if (instance == null) {
+            instance = new Paddle();
+        }
+        return instance;
+    }
+    public void reset(){
+    	this.x = Gdx.graphics.getWidth() / 2 - 50;
+        this.y = 40;
+        width = 100;
+        height = 10;
+        poderActivadoA = false;
+        poderActivadoR = false;
+        paddleSpeed = 15;
+
+    }
+
+
     //Métodos de la interfaz
     @Override
 	public void acelerar() {

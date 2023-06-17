@@ -39,7 +39,8 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    levelSpeed = 5;
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
-		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
+		    //pad = new Paddle();
+		    pad = Paddle.getInstance();
 		    vidas = 5;   
 		}
 		public void dibujaTextos(PingBall b) {
@@ -82,7 +83,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	nivel = 1;
 	        	levelSpeed = 5;
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
-	        	pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
+	        	//pad = new Paddle();
+	        	//pad= Paddle.getInstance();
+	        	pad.reset();
 	        	ball.setPuntaje(0);
 	        	blockManager.createBlocks(nivel+2);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
