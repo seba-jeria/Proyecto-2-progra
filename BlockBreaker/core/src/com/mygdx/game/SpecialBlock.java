@@ -8,8 +8,8 @@ public class SpecialBlock extends Block{
     private int y;
     private int width;
     private int height;
-    Color cc;
-    private boolean destroyed;   
+    private Color cc;
+    private boolean destroyed;
     //Metodo con las dimensiones de la pantalla
     public SpecialBlock(int x, int y, int width, int height) {
     	super(x, y, width, height); //necesario para la extensión de Block

@@ -10,8 +10,8 @@ public abstract class Block {
     private int y;
     private int width;
     private int height;
-    Color cc;
-    boolean destroyed;
+    private Color cc;
+    private boolean destroyed;
     //Metodo con las dimensiones de la pantalla
     public Block (int x, int y, int width, int height) {
         this.x = x;

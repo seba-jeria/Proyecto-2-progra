@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class BlockManager {
     private ArrayList<Block> blocks;
     private Colisiones colision;
+    
     public BlockManager() {
         blocks = new ArrayList<>();
         colision = new Colisiones();
@@ -48,11 +49,11 @@ public class BlockManager {
                 iterator.remove();
             }
         }
-    }
+    }/*
     //Array de Block
     public ArrayList<Block> getBlocks() {
         return blocks;
-    }
+    }*/
     //Chequea la colision de la bola con el bloque
     public void checkCollision(PingBall ball) {
         for (Block block : blocks) {

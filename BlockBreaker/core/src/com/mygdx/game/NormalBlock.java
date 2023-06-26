@@ -9,8 +9,9 @@ public class NormalBlock extends Block{
     private int y;
     private int width;
     private int height;
-    Color cc;
-    boolean destroyed;
+    private Color cc;
+    private boolean destroyed;
+   
     //Metodo con las dimensiones de la pantalla
     public NormalBlock(int x, int y, int width, int height) {
     	super(x, y, width, height); //necesario para la extensión de Block 
@@ -21,10 +22,13 @@ public class NormalBlock extends Block{
         destroyed = false;
         cc = new Color(0, 0, 1, 10); //color del bloque
     }  
+    
     //Chequea la colisión y si hay colisión destruye el bloque 
     public void checkCollition(PingBall ball) {
+    	
     	destroyed = true;
     }
+    
     //Para que se dibuje el bloque
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
