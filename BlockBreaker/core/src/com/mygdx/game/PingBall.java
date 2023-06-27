@@ -10,6 +10,7 @@ public class PingBall implements ChangeSpeed{
 	    private int x;
 	    private int y;
 	    private int size;
+	    private BallStrategy tamano;
 	    private int xSpeed;
 	    private int ySpeed;
 	    private Color color = Color.WHITE;
@@ -27,10 +28,12 @@ public class PingBall implements ChangeSpeed{
 	    }	    
 	    @Override //Método para manejar la aceleración de la bola
         public void acelerar() {
+	    	
             if(xSpeed > 0) { xSpeed += 2;}
             else { xSpeed -= 2; }
             if(ySpeed >0) { ySpeed += 2; }
             else { ySpeed -=2; }
+            poderActivado = false;
         }
         @Override //Método para ralentizar la aceleración de la bola
         public void ralentizar() {
@@ -100,6 +103,13 @@ public class PingBall implements ChangeSpeed{
 	            ySpeed = - ySpeed;
 	            puntaje++;
 	    }
-	    
-
+	   
+	    public void agrandar() {
+	    	tamano = new PelotaChica();
+	    	size = tamano.selectSize();
+	    }
+	    public void achicar() {
+	    	tamano = new PelotaChica();
+	    	size = tamano.selectSize();
+	    }
 	}

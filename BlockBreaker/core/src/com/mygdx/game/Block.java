@@ -12,16 +12,39 @@ public abstract class Block {
     private int height;
     private Color cc;
     private boolean destroyed;
+    
     //Metodo con las dimensiones de la pantalla
     public Block (int x, int y, int width, int height) {
-        this.x = x;
+    	this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         destroyed = false;       
     }
+    
+    public abstract void selectColor();
     //Método abstracto usado en NormalBlock y SpecialBlock
     public abstract void checkCollition(PingBall ball);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //Dibujo del bloque en la ventana
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);

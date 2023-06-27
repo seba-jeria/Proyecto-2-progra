@@ -24,12 +24,27 @@ public class BlockManager {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
             	randomValue = Math.random();
-	                if (randomValue < 0.95) {
-	                    // 95% de probabilidad de que sea un bloque normal
-	                    blocks.add(new NormalBlock(x, y, blockWidth, blockHeight));
+	                if (randomValue < 0.8) {
+	                    // 90% de probabilidad de que sea un bloque normal
+	                	Block b = new NormalBlock(x, y, blockWidth, blockHeight);
+	                	b.selectColor();
+	                    blocks.add(b);
 	                } else {
-	                    // 5% de probabilidad de que sea un bloque especial
-	                    blocks.add(new SpecialBlock(x, y, blockWidth, blockHeight));
+	                	if(randomValue < 0.9) {
+	                		// 0.89 0.9 0.91 0.92 0.93 0.94
+	                		// 5% de probabilidad de que sea un bloque especial
+		                    Block sB  = new SpecialBlock(x, y, blockWidth, blockHeight);
+		                    sB.selectColor();
+		                	blocks.add(sB);
+	                	}
+	                	else {
+	                		// 0.95 0.96 0.97 0.98 0.99 1
+	                		// 5% de probabilidad de que sea un bloque especial
+		                    Block sB2  = new SpecialBlock2(x, y, blockWidth, blockHeight);
+		                    sB2.selectColor();
+		                	blocks.add(sB2);
+	                	}
+	                    
 	                }
             }
         }
@@ -49,11 +64,13 @@ public class BlockManager {
                 iterator.remove();
             }
         }
-    }/*
+    }
+    /*
     //Array de Block
     public ArrayList<Block> getBlocks() {
         return blocks;
     }*/
+    
     //Chequea la colision de la bola con el bloque
     public void checkCollision(PingBall ball) {
         for (Block block : blocks) {

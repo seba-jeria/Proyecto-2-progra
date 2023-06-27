@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 //Clase abstracta extendida de Block
-public class SpecialBlock extends Block{
+public  class SpecialBlock extends Block{
 	private int x;
     private int y;
     private int width;
@@ -18,14 +18,17 @@ public class SpecialBlock extends Block{
         this.width = width;
         this.height = height;
         destroyed = false;
-        cc = new Color(1, 0, 0, 10); //color del bloque
+        //cc = new Color(1, 0, 0, 10); //color del bloque
     }   
     //Si colisiona con el bloque especial, destruye el bloque. La pelota se agranda y se hace mas lenta 
     public void checkCollition(PingBall ball) {
     	ball.setSize(25);
     	ball.ralentizar();
+    	
     	destroyed = true;
     }
+    
+    
   //Para que se dibuje el bloque
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
@@ -44,4 +47,10 @@ public class SpecialBlock extends Block{
     public int getWidth() {return width;}
     
     public int getHeight() {return height;}
+	@Override
+	public void selectColor() {
+		// TODO Auto-generated method stub
+		this.cc = new Color(1, 0, 0, 10); //color del bloque
+		
+	}
 }
