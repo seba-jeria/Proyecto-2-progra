@@ -10,7 +10,8 @@ public class PingBall implements ChangeSpeed{
 	    private int x;
 	    private int y;
 	    private int size;
-	    private BallStrategy tamano;
+	    public BallStrategy str;
+	    private BallSize tamano = new BallSize();
 	    private int xSpeed;
 	    private int ySpeed;
 	    private Color color = Color.WHITE;
@@ -105,11 +106,13 @@ public class PingBall implements ChangeSpeed{
 	    }
 	   
 	    public void agrandar() {
-	    	tamano = new PelotaChica();
-	    	size = tamano.selectSize();
+	    	str = new PelotaGrande();
+	    	tamano.setSize(str);
+	    	size = tamano.changeSize();
 	    }
 	    public void achicar() {
-	    	tamano = new PelotaChica();
-	    	size = tamano.selectSize();
+	    	str = new PelotaChica();
+	    	tamano.setSize(str);
+	    	size = tamano.changeSize();
 	    }
 	}

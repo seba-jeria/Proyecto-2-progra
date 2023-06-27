@@ -7,7 +7,7 @@ public class BallSize {
 		str = estrategia;
 		
 	}
-	public void changeSize() {
-		str.selectSize();
+	public int changeSize() {
+		return(str.selectSize());
 	}
 }
