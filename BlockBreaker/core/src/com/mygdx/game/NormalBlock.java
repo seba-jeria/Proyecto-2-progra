@@ -2,56 +2,21 @@ package com.mygdx.game;
 
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-//Clase abstracta extendida de Block
-public class NormalBlock extends Block{
-	private int x;
-    private int y;
-    private int width;
-    private int height;
-    private Color cc;
-    private boolean destroyed;
-   
-    //Metodo con las dimensiones de la pantalla
+
+// Clase concreta que extiende de Block
+public class NormalBlock extends Block {
+
     public NormalBlock(int x, int y, int width, int height) {
-    	super(x, y, width, height); //necesario para la extensión de Block 
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        destroyed = false;
-        //cc = new Color(0, 0, 1, 10); //color del bloque
-    }  
-    
-    //Chequea la colisión y si hay colisión destruye el bloque 
+        super(x, y, width, height);
+    }
+
+    @Override
     public void checkCollition(PingBall ball) {
-    	
-    	destroyed = true;
-    }
-    
-    //Para que se dibuje el bloque
-    public void draw(ShapeRenderer shape){
-    	shape.setColor(cc);
-        shape.rect(x, y, width, height);
-    }
-    //Si es true destruye bloque
-    public boolean isDestroyed() {
-    	return destroyed;
+        setDestroyed(true);
     }
 
-    //getters de las dimensiones
-    public int getX() {return x;}
-    
-    public int getY() {return y;}
-    
-    public int getWidth() {return width;}
-    
-    public int getHeight() {return height;}
-
-	
-
-	@Override
-	public void selectColor() {
-		this.cc =   new Color(0, 0, 1, 10); //color del bloque	
-	}
+    @Override
+    public void selectColor() {
+        setColor(new Color(0, 0, 1, 1)); // Establece el color del bloque
+    }
 }

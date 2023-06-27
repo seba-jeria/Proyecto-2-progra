@@ -26,8 +26,9 @@ public class BlockManager {
             	randomValue = Math.random();
 	                if (randomValue < 0.8) {
 	                    // 90% de probabilidad de que sea un bloque normal
+	                	//Block b = new NormalBlock();
 	                	Block b = new NormalBlock(x, y, blockWidth, blockHeight);
-	                	b.selectColor();
+	                	//b.templateMethod(x, y, blockWidth, blockHeight);
 	                    blocks.add(b);
 	                } else {
 	                	if(randomValue < 0.9) {

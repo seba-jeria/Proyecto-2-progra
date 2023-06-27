@@ -15,33 +15,24 @@ public abstract class Block {
     
     //Metodo con las dimensiones de la pantalla
     public Block (int x, int y, int width, int height) {
-    	this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    	setPosition(x,y);
+    	setTamano(width, height);
+    	selectColor();    	
         destroyed = false;       
     }
     
+ 
+    public void setPosition(int x, int y){
+    	this.x = x;
+    	this.y = y;
+    }
+    public void setTamano(int width, int height){
+    	this.width = width;
+        this.height = height;
+    }
     public abstract void selectColor();
     //Método abstracto usado en NormalBlock y SpecialBlock
     public abstract void checkCollition(PingBall ball);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -62,4 +53,12 @@ public abstract class Block {
     public int getWidth() {return width;}
     
     public int getHeight() {return height;}
+    
+    public void setColor(Color c) {
+    	cc = c;
+    }
+    
+    public void setDestroyed(boolean b) {
+    	destroyed = b;
+    }
 }
