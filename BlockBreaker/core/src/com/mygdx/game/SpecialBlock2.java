@@ -21,6 +21,6 @@ public class SpecialBlock2 extends Block {
 
     @Override
     public void selectColor() {
-        setColor(new Color(0, 1, 0, 1)); // Establece el color del bloque
+        setColor(new Color(1, 0, 0, 1)); // Establece el color del bloque
     }
 }

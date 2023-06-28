@@ -14,19 +14,19 @@ public class PingBall implements ChangeSpeed{
 	    private BallSize tamano = new BallSize();
 	    private int xSpeed;
 	    private int ySpeed;
-	    private Color color = Color.WHITE;
+	    private Color color;
 	    private int puntaje;
 	    private boolean estaQuieto;
 	    private boolean poderActivado = false;
-	    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
-	        this.x = x;
-	        this.y = y;
-	        this.size = size;
-	        this.xSpeed = xSpeed;
-	        this.ySpeed = ySpeed;
-	        estaQuieto = iniciaQuieto;
-	        puntaje = 0;
-	    }	    
+	    public PingBall(BallBuilder builder) {
+	       x = builder.getX();
+	       y = builder.getY();
+	       size = builder.getSize();
+	       xSpeed = builder.getXSpeed();
+	       ySpeed = builder.getYSpeed();
+	       estaQuieto = builder.getIniciaQuieto();
+	       color = builder.getColor();
+	    }    
 	    @Override //Método para manejar la aceleración de la bola
         public void acelerar() {
 	    	

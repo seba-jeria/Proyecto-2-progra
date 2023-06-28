@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,6 +24,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private int xSpeedBall;
 	private int ySpeedBall;
 	private int levelSpeed;
+	private Color color = Color.WHITE;
 		@Override
 		public void create () {	
 			camera = new OrthographicCamera();
@@ -38,7 +40,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    ySpeedBall = 7;
 		    levelSpeed = 5;
 		    shape = new ShapeRenderer();
-		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
+		    ball = new BallBuilder()
+		    			.x(Gdx.graphics.getWidth()/2-10)
+		    			.y(41)
+		    			.size(10)
+		    			.xSpeed(5)
+		    			.ySpeed(7)
+		    			.iniciaQuieto(true)
+		    			.color(color)
+		    			.build();
 		    //pad = new Paddle();
 		    pad = Paddle.getInstance();
 		    vidas = 5;   
@@ -74,7 +84,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	pad.acelerar();
 	        	xSpeedBall = levelSpeed;
 	         	ySpeedBall = levelSpeed+2;
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
+	        	ball = new BallBuilder()
+			    			.x(pad.getX()+pad.getWidth()/2-5)
+			    			.y(pad.getY()+pad.getHeight()+11)
+			    			.size(10)
+			    			.xSpeed(xSpeedBall)
+			    			.ySpeed(ySpeedBall)
+			    			.iniciaQuieto(true)
+			    			.color(color)
+			    			.build();
 	        	ball.setPuntaje(puntaje);
 	        }
 	        // verificar game over
@@ -82,7 +100,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	vidas = 5;
 	        	nivel = 1;
 	        	levelSpeed = 5;
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
+	        	ball = new BallBuilder()
+		    			.x(pad.getX()+pad.getWidth()/2-5)
+		    			.y(pad.getY()+pad.getHeight()+11)
+		    			.size(10)
+		    			.xSpeed(xSpeedBall)
+		    			.ySpeed(ySpeedBall)
+		    			.iniciaQuieto(true)
+		    			.color(color)
+		    			.build();
 	        	//pad = new Paddle();
 	        	//pad= Paddle.getInstance();
 	        	pad.reset();
@@ -100,7 +126,15 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	xSpeedBall = levelSpeed;
 	         	ySpeedBall = levelSpeed+2;
 	        	int puntaje = ball.getPuntaje();
-	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, xSpeedBall, ySpeedBall, true);
+	        	ball = new BallBuilder()
+		    			.x(pad.getX()+pad.getWidth()/2-5)
+		    			.y(pad.getY()+pad.getHeight()+11)
+		    			.size(10)
+		    			.xSpeed(xSpeedBall)
+		    			.ySpeed(ySpeedBall)
+		    			.iniciaQuieto(true)
+		    			.color(color)
+		    			.build();
 	        	ball.setPuntaje(puntaje);
 	        }    	
 	        //dibujar bloques
