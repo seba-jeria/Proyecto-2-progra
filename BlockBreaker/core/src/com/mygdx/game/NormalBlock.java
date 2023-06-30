@@ -9,20 +9,16 @@ public class NormalBlock extends Block {
      super(x, y, width, height);
  }
  @Override
- public void checkCollition(PingBall ball) {
-     setDestroyed(true);
- }
- @Override
  public void selectColor() {
      setColor(new Color(0, 0, 1, 1)); // Establece el color del bloque
  }
  @Override
+ //Aplicar poder (ralentizar pelota , acelerar pelota)
  public void applyPower(PingBall ball) {
-     // TODO Auto-generated method stub
  }
  @Override
+//Para verificar si tiene poder
  public boolean tienePoder() {
-     // TODO Auto-generated method stub
      return false;
  }
 }

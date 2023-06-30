@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-
+//Clase PingBallBuilder que se implementa de builder, usado para aplicar el patrón builder
 public class PingBallBuilder implements Builder {
 	private PingBall ball;
 	public PingBallBuilder() {

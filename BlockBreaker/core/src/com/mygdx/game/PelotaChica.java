@@ -7,6 +7,4 @@ public class PelotaChica implements BallStrategy{
 	public int selectSize() {
 		return 7;
 	}
-	
-
 }

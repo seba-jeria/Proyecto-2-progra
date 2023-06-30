@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-
+//Clase PaddleBuilder que se implementa de builder, usado para aplicar el patrón builder
 public class PaddleBuilder implements Builder{
 	private Paddle paddle;
 	public PaddleBuilder() {

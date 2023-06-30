@@ -62,7 +62,6 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			/*font.draw(batch, "x speed " + b.getXSpeed(), 10, 25);
 			font.draw(batch, "y speed " + b.getYSpeed(), 350, 25);
 			font.draw(batch, "paddle: " + pad.getVelocity(), Gdx.graphics.getWidth()-35, 25);*/
-			
 			batch.end();
 		}	
 		@Override
@@ -105,8 +104,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	//pad= Paddle.getInstance();
 	        	pad.reset();
 	        	ball.setPuntaje(0);
-	        	blockManager.createBlocks(nivel+2);
-	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);	        	
+	        	blockManager.createBlocks(nivel+2);        	
 	        }
 	        // verificar si el nivel se terminó
 	        if (blockManager.getSize() == 0) {

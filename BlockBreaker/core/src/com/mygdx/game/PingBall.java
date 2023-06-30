@@ -17,7 +17,8 @@ public class PingBall implements ChangeSpeed{
     private boolean poderActivado = false;
     private BallStrategy str;
     private BallSize tamano = new BallSize();
-    public PingBall() {
+    //Constructor vacio usado en el patrón Builder
+    public PingBall() { 
     	this.x = 0;
         this.y = 0;
         this.size = 0;
@@ -25,16 +26,7 @@ public class PingBall implements ChangeSpeed{
         this.ySpeed = 0;
         estaQuieto = false;
         puntaje = 0;
-    }
-    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.xSpeed = xSpeed;
-        this.ySpeed = ySpeed;
-        estaQuieto = iniciaQuieto;
-        puntaje = 0;
-    }	     
+    }     
 	    @Override //Método para manejar la aceleración de la bola
         public void acelerar() {
             if(xSpeed > 0) { xSpeed += 2;}
@@ -57,7 +49,8 @@ public class PingBall implements ChangeSpeed{
 	    public void setPuntaje(int puntos) {
 	    	puntaje = puntos;
 	    }	    
-	    public boolean estaQuieto() {	    	return estaQuieto;
+	    public boolean estaQuieto() {	    	
+	    	return estaQuieto;
 	    }
 	    public void setEstaQuieto(boolean bb) {
 	    	estaQuieto=bb;
@@ -78,7 +71,7 @@ public class PingBall implements ChangeSpeed{
 	    
 	    public int getYSpeed() {return ySpeed;}	    
 	    
-	    public void setPoderAcivado(boolean poderActivado) {this.poderActivado = poderActivado;}	
+	    public void setPoderActivado(boolean poderActivado) {this.poderActivado = poderActivado;}	
 	    
 	    public void setVelocity(int x, int y) {
 	    	this.xSpeed=x;

@@ -8,29 +8,20 @@ public class SpecialBlock2 extends Block {
      super(x, y, width, height);
  }
  @Override
- public void checkCollition(PingBall ball) {
-     ball.achicar();
-     if (ball.getPoderActivado()) {
-         ball.acelerar();
-     }
-
-     setDestroyed(true);
- }
- @Override
  public void selectColor() {
      setColor(new Color(1, 0, 0, 1)); // Establece el color del bloque
  }
  @Override
+ //Aplicar poder (ralentizar pelota , acelerar pelota)
  public void applyPower(PingBall ball) {
-     // TODO Auto-generated method stub
      ball.achicar();
      if (ball.getPoderActivado()) {
          ball.acelerar();
      }
  }
  @Override
+//Para verificar si tiene poder
  public boolean tienePoder() {
-     // TODO Auto-generated method stub
      return true;
  }
 }
