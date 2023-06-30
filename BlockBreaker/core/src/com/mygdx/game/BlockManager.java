@@ -24,14 +24,14 @@ public class BlockManager {
             y -= blockHeight + 10;
             for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
             	randomValue = Math.random();
-	                if (randomValue < 0.8) {
+	                if (randomValue < 0.89) {
 	                    // 90% de probabilidad de que sea un bloque normal
 	                	//Block b = new NormalBlock();
 	                	Block b = new NormalBlock(x, y, blockWidth, blockHeight);
 	                	//b.templateMethod(x, y, blockWidth, blockHeight);
 	                    blocks.add(b);
 	                } else {
-	                	if(randomValue < 0.9) {
+	                	if(randomValue < 0.95) {
 	                		// 0.89 0.9 0.91 0.92 0.93 0.94
 	                		// 5% de probabilidad de que sea un bloque especial
 		                    Block sB  = new SpecialBlock(x, y, blockWidth, blockHeight);

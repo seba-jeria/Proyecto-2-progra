@@ -9,3 +9,5 @@ public interface ChangeSpeed {
 	public void ralentizar();
 	
 }
+
+

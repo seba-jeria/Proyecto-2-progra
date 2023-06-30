@@ -1,11 +1,9 @@
 package com.mygdx.game;
-
+//Clase que implementa la interfaz BallStrategy para aplicar el patrón Strategy
 public class PelotaGrande implements BallStrategy{
-	//private int size;
-    
 	@Override
+	//Cambia el tamaño de la pelota
 	public int selectSize() {
-		//size = 25;
 		return (25);
 	}
 }

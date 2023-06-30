@@ -5,31 +5,38 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 //Clase implementada de la interfaz ChangeSpeed
-
 public class PingBall implements ChangeSpeed{
-	    private int x;
-	    private int y;
-	    private int size;
-	    public BallStrategy str;
-	    private BallSize tamano = new BallSize();
-	    private int xSpeed;
-	    private int ySpeed;
-	    private Color color;
-	    private int puntaje;
-	    private boolean estaQuieto;
-	    private boolean poderActivado = false;
-	    public PingBall(BallBuilder builder) {
-	       x = builder.getX();
-	       y = builder.getY();
-	       size = builder.getSize();
-	       xSpeed = builder.getXSpeed();
-	       ySpeed = builder.getYSpeed();
-	       estaQuieto = builder.getIniciaQuieto();
-	       color = builder.getColor();
-	    }    
+	private int x;
+    private int y;
+    private int size;
+    private int xSpeed;
+    private int ySpeed;
+    private Color color = Color.WHITE;
+    private int puntaje;
+    private boolean estaQuieto;
+    private boolean poderActivado = false;
+    private BallStrategy str;
+    private BallSize tamano = new BallSize();
+    public PingBall() {
+    	this.x = 0;
+        this.y = 0;
+        this.size = 0;
+        this.xSpeed = 0;
+        this.ySpeed = 0;
+        estaQuieto = false;
+        puntaje = 0;
+    }
+    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        estaQuieto = iniciaQuieto;
+        puntaje = 0;
+    }	     
 	    @Override //Método para manejar la aceleración de la bola
         public void acelerar() {
-	    	
             if(xSpeed > 0) { xSpeed += 2;}
             else { xSpeed -= 2; }
             if(ySpeed >0) { ySpeed += 2; }
@@ -73,6 +80,11 @@ public class PingBall implements ChangeSpeed{
 	    
 	    public void setPoderAcivado(boolean poderActivado) {this.poderActivado = poderActivado;}	
 	    
+	    public void setVelocity(int x, int y) {
+	    	this.xSpeed=x;
+	    	this.ySpeed=y;
+	    }
+	    
 	    public boolean getPoderActivado() {return poderActivado;}	
 	    
 	    public int getPuntaje() {
@@ -104,7 +116,7 @@ public class PingBall implements ChangeSpeed{
 	            ySpeed = - ySpeed;
 	            puntaje++;
 	    }
-	   
+	   //Métodos que achican o agrandan la pelota dependiendo si es SpecialBlock o SpecialBlock2
 	    public void agrandar() {
 	    	str = new PelotaGrande();
 	    	tamano.setSize(str);

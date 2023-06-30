@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 //Clase implementada de la interfaz ChangeSpeed
-
 public class Paddle implements ChangeSpeed {
     private static Paddle instance;
     private int x;
@@ -16,19 +15,17 @@ public class Paddle implements ChangeSpeed {
     private boolean poderActivadoA;
     private boolean poderActivadoR;
     private int paddleSpeed;
-
     private Paddle() {
         // Constructor privado para evitar la creación de instancias directamente.
     	reset();
     }
-
-    public static Paddle getInstance() {
+    public static Paddle getInstance() { //Singleton
         if (instance == null) {
             instance = new Paddle();
         }
         return instance;
     }
-    public void reset(){
+    public void reset(){ // Reset creado para que se cree el Paddle al pasar de nivel
     	this.x = Gdx.graphics.getWidth() / 2 - 50;
         this.y = 40;
         width = 100;
@@ -36,10 +33,7 @@ public class Paddle implements ChangeSpeed {
         poderActivadoA = false;
         poderActivadoR = false;
         paddleSpeed = 15;
-
     }
-
-
     //Métodos de la interfaz
     @Override
 	public void acelerar() {
@@ -57,6 +51,25 @@ public class Paddle implements ChangeSpeed {
 	public int getWidth() {return width;}
 	
 	public int getHeight() {return height;}
+	
+	public void setTamano(int height,int width) {
+		this.height = height;
+		this.width = width;
+	}
+	public void setPosicion(int x, int y) {
+		this.x=x;
+		this.y=y;
+	}
+	public void setPoderes(boolean a, boolean r) {
+		poderActivadoA = a;
+		poderActivadoR = r;
+	}
+	public void setVelocity(int Speed) {
+		this.paddleSpeed=Speed;
+	}
+	public int getVelocity() {
+		return paddleSpeed;
+	}
 	
 	//Dibuja en la pantalla el paddle a partir del movimiento de las flechas
 	public void draw(ShapeRenderer shape){
@@ -77,5 +90,8 @@ public class Paddle implements ChangeSpeed {
         }
         shape.rect(x, y, width, height);
     }
+
+
+    
 
 }
